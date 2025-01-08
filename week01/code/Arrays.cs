@@ -13,7 +13,18 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // create an array of doubles with the length specified
+        double [] result = new double[length]; 
+
+        // loop through the array to calculate the multiples of the number
+        for (int i = 0; i < length; i++)
+        { 
+            // add the next multiple of the number to the array
+            result[i] = number * (i + 1);
+        }
+
+        // return the array of multiples
+        return result; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +40,24 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // verify that the amount is within the range of 1 to data.Count
+        amount = amount % data.Count;
+
+        // create a temporary list to store the rotated values
+        List<int> tempList = new List<int>();
+
+        // add the values that will be rotated to the temporary list
+        tempList.AddRange(data.GetRange(data.Count - amount, amount));
+
+        // add the rest of the values to the temporary list
+        tempList.AddRange(data.GetRange(0, data.Count - amount));
+        
+        // loop through the data list to update the values
+        for (int i = 0; i < data.Count; i++)
+        {
+            // update the values in the data list
+            data[i] = tempList[i];
+        }
     }
 }
