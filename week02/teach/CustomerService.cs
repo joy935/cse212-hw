@@ -11,24 +11,55 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Enqueue one customer and serve the customer
+        // Expected Result: It should display the customer information
         Console.WriteLine("Test 1");
+        var cs = new CustomerService(2);
+        cs.AddNewCustomer();
+        cs.ServeCustomer();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: check if the queue is empty before serving
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
-        Console.WriteLine("Test 2");
+        // Scenario: Serve a customer in the right order
+        // Expected Result: It should serve a customer and remove them from the queue
+        Console.WriteLine("Test 3");
+        cs = new CustomerService(3);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        Console.WriteLine(cs);
+        cs.ServeCustomer();
+        Console.WriteLine(cs);
 
-        // Defect(s) Found: 
+        // Defect(s) Found: none
 
         Console.WriteLine("=================");
 
-        // Add more Test Cases As Needed Below
+        // Test 3
+        // Scenario: Respect the max queue size
+        // Expected Result: It should display an error message when the queue is full (maxSize = 2)
+        Console.WriteLine("Test 2");
+        cs = new CustomerService(2);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        Console.WriteLine(cs);        
+
+        // Defect(s) Found: doesn't recognize that the queue is full. Change > to >= in AddNewCustomer
+
+        Console.WriteLine("=================");
+
+        // Test 4
+        // Scenario: Serve a customer from an empty queue
+        // Expected Result: It should display an error message
+        Console.WriteLine("Test 4");
+        cs = new CustomerService(2);
+        cs.ServeCustomer();
+
+        // Defect(s) Found: doesn't recognize that the queue is empty. Check if the queue is empty before serving
+
     }
 
     private readonly List<Customer> _queue = new();
@@ -39,7 +70,7 @@ public class CustomerService {
             _maxSize = 10;
         else
             _maxSize = maxSize;
-    }
+    } 
 
     /// <summary>
     /// Defines a Customer record for the service queue.
@@ -67,7 +98,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +119,13 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count == 0) {
+            Console.WriteLine("No Customers in Queue.");
+        } else {
+            var customer = _queue[0];
+            Console.WriteLine(customer);
+            _queue.RemoveAt(0);
+        }
     }
 
     /// <summary>
