@@ -22,6 +22,7 @@ public class TakingTurnsQueue
     {
         var person = new Person(name, turns);
         _people.Enqueue(person);
+        Console.WriteLine("Enqueued: " + person, "Turns left: " + person.Turns);
     }
 
     /// <summary>
@@ -44,8 +45,11 @@ public class TakingTurnsQueue
             {
                 person.Turns -= 1;
                 _people.Enqueue(person);
+                Console.WriteLine("Enqueued: " + person, "Turns left: " + person.Turns);
+            } else if (person.Turns <= 0) { // added this condition to handle infinite turns, scenarios 3 and 4 passed
+                _people.Enqueue(person);
+                Console.WriteLine("Enqueued: " + person, "Turns left: " + person.Turns);
             }
-
             return person;
         }
     }
