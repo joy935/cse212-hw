@@ -39,7 +39,9 @@ public class PriorityQueueTests
     // Scenario: Create a queue with the following people and priorities:
     // Lui, 1; Sue, 2; Bob, 16; Tim, 2.
     // Expected Result: Bob, Sue, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Changed the condition in the for loop from >= to > to get the first 
+    // item with the highest priority and changed the _queue.Count - 1 to _queue.Count 
+    // to check the last item.
     public void TestPriorityQueue_SamePriority()
     {
         var lui = new PriorityItem("Lui", 1);
