@@ -63,8 +63,15 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
-        }
+            var degree = fields[3];
+            var count = 1;
 
+            if (degrees.ContainsKey(degree)) {
+                degrees[degree] += count;
+            } else {
+                degrees[degree] = count;
+            }
+        }
         return degrees;
     }
 
@@ -87,7 +94,42 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // remove spaces from the words
+        string word1NoSpace = word1.Replace(" ", "");
+        string word2NoSpace = word2.Replace(" ", "");
+
+        // check if the words have the same length
+        if (word1NoSpace.Length == word2NoSpace.Length) {
+            var dictionary1 = new Dictionary<char, int>();
+            var dictionary2 = new Dictionary<char, int>();
+
+            // count the frequency of each letter in the word
+            // and store it in a dictionary
+            // use to lower to ignore cases
+            foreach (var letter in word1NoSpace.ToLower()) {
+                if (dictionary1.ContainsKey(letter)) {
+                    dictionary1[letter] += 1;
+                } else {
+                    dictionary1[letter] = 1;
+                }
+            }
+
+            // count the frequency of each letter in the word
+            // and store it in a dictionary
+            // use to lower to ignore cases
+            foreach (var letter in word2NoSpace.ToLower()) {
+                if (dictionary2.ContainsKey(letter)) {
+                    dictionary2[letter] += 1;
+                } else {
+                    dictionary2[letter] = 1;
+                }
+            }
+            
+            // check if the dictionaries are equal
+            return dictionary1.OrderBy(x => x.Key).SequenceEqual(dictionary2.OrderBy(x => x.Key));
+        } else {
+            return false;
+        }
     }
 
     /// <summary>
