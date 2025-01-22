@@ -33,6 +33,16 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        // check if the current x is at the leftmost edge of the maze
+        if (_currX == 1) {
+            throw new InvalidOperationException("Can't go that way!");
+        // check if the left direction is blocked
+        } else if (_mazeMap[(_currX, _currY)][0] == false) {
+            throw new InvalidOperationException("Can't go that way!");
+        // if the left direction is not blocked, move left
+        } else {
+            _currX--;
+        }
     }
 
     /// <summary>
@@ -42,6 +52,16 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+        // check if the current x is at the rightmost edge of the maze
+        if (_currX == 6) {
+            throw new InvalidOperationException("Can't go that way!");
+        // check if the right direction is blocked
+        } else if (_mazeMap[(_currX, _currY)][1] == false) {
+            throw new InvalidOperationException("Can't go that way!");
+        // if the right direction is not blocked, move right
+        } else {
+            _currX++;
+        }
     }
 
     /// <summary>
@@ -51,6 +71,16 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        // check if the current y is at the topmost edge of the maze
+        if (_currY == 1) {
+            throw new InvalidOperationException("Can't go that way!");
+        // check if the up direction is blocked
+        } else if (_mazeMap[(_currX, _currY)][2] == false) {
+            throw new InvalidOperationException("Can't go that way!");
+        // if the up direction is not blocked, move up
+        } else {
+            _currY--;
+        }
     }
 
     /// <summary>
@@ -60,6 +90,16 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+        // check if the current y is at the bottommost edge of the maze
+        if (_currY == 6) {
+            throw new InvalidOperationException("Can't go that way!");
+        // check if the down direction is blocked
+        } else if (_mazeMap[(_currX, _currY)][3] == false) {
+            throw new InvalidOperationException("Can't go that way!");
+        // if the down direction is not blocked, move down
+        } else {
+            _currY++;
+        }
     }
 
     public string GetStatus()
