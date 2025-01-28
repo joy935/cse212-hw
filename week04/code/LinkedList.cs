@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Transactions;
 
 public class LinkedList : IEnumerable<int>
 {
@@ -140,6 +141,45 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        
+        // If the list is empty, then there is nothing to remove.
+        if (_head is null)
+        {
+            return;
+        }
+
+        // If the list is not empty, then start at the head of the list.
+        Node? current = _head;
+        while (current is not null) {
+            if (current.Data == value)
+            {
+                // If the location of 'value' is at the head of the list,
+                // then we can call remove_head to remove the node.
+                if (current == _head) 
+                {
+                    RemoveHead();
+                }
+                // If the location of 'value' is at the tail of the list,
+                // then we can call remove_tail to remove the node.
+                else if (current == _tail)
+                {
+                    RemoveTail();
+                }
+                // For any other location of 'value', need to reconnect the
+                // links to remove the node.
+                else
+                {
+                    if (current.Next != null) {
+                        current.Next.Prev = current.Prev; // Connect the node after 'value' to the node before 'value'
+                    }
+                    if (current.Prev != null) {
+                    current.Prev.Next = current.Next; // Connect the node before 'value' to the node after 'value'
+                    }
+                    return; // Exit the function after we remove the node
+                }
+            }
+            current = current.Next; // Go to the next node to search for 'value'
+        }
     }
 
     /// <summary>
