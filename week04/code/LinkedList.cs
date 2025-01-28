@@ -188,6 +188,25 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+        // If the list is empty, then there is nothing to replace.
+        if (_head is null)
+        {
+            return;
+        }
+
+        // If the list is not empty
+        Node? current = _head;
+        // Iterate through the linked list
+        while (current is not null)
+        {
+            // If the current node contains the old value, replace it with the new value
+            if (current.Data == oldValue)
+            {
+                current.Data = newValue;
+            }
+            // Move to the next node
+            current = current.Next;
+        }
     }
 
     /// <summary>
