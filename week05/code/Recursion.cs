@@ -98,6 +98,11 @@ public static class Recursion
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null)
     {
+        // Initialize the remember dictionary if it is null
+        if (remember == null) {
+            remember = new Dictionary<int, decimal>();
+        }
+
         // Base Cases
         if (s == 0)
             return 0;
@@ -111,7 +116,11 @@ public static class Recursion
         // TODO Start Problem 3
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        if (remember.ContainsKey(s)) {
+            return remember[s]; // Return the result if it is already in the remember dictionary
+        }
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember); // Recursive case
+        remember[s] = ways; // Store the result in the remember dictionary
         return ways;
     }
 
