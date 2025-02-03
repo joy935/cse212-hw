@@ -140,6 +140,18 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        int position = pattern.IndexOf("*"); // Find the position of the first wildcard
+
+        if (position == -1)
+        {
+            results.Add(pattern); // Base case
+            return;
+        }
+
+        WildcardBinary(pattern.Substring(0, position) + "0" + pattern.Substring(position + 1), results); // Recuse with * replaced with 0
+        
+        WildcardBinary(pattern.Substring(0, position) + "1" + pattern.Substring(position + 1), results); // Recuse with * replaced with 1
+
     }
 
     /// <summary>
