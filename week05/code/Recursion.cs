@@ -44,6 +44,14 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
+        if (word.Length == size) { // Use word.Length instead of letters.Length to check for base case because the word can be shorter than the letters
+            results.Add(word); // Base case
+        } else {
+            for (int i = 0; i < letters.Length; i++) {
+                string lettersLeft = letters.Remove(i, 1);
+                PermutationsChoose(results, lettersLeft, size, word + letters[i]); // Recursive case
+            }
+        }
     }
 
     /// <summary>
