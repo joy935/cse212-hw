@@ -166,11 +166,31 @@ public static class Recursion
             currPath = new List<ValueTuple<int, int>>();
         }
         
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
+        currPath.Add((x, y)); // Add the current position to the path
 
         // TODO Start Problem 5
         // ADD CODE HERE
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        if (maze.IsEnd(x, y)) {
+            results.Add(currPath.AsString()); // Base case
+            currPath.RemoveAt(currPath.Count - 1); // Backtrack: Remove the current position from the path
+            return;
+        }
+
+        if (maze.IsValidMove(currPath, x + 1, y)) { // Move right
+            SolveMaze(results, maze, x + 1, y, currPath); // Recursive case
+        }
+        if (maze.IsValidMove(currPath, x - 1, y)) { // Move left
+            SolveMaze(results, maze, x - 1, y, currPath); // Recursive case
+        }
+        if (maze.IsValidMove(currPath, x, y + 1)) { // Move down
+            SolveMaze(results, maze, x, y + 1, currPath); // Recursive case
+        }
+        if (maze.IsValidMove(currPath, x, y - 1)) { // Move up
+            SolveMaze(results, maze, x, y - 1, currPath); // Recursive case
+        }
+
+        currPath.RemoveAt(currPath.Count - 1); // Backtrack: Remove the current position from the path
+
     }
 }
