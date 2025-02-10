@@ -81,19 +81,12 @@ public class BinarySearchTree : IEnumerable<int>
     private void TraverseBackward(Node? node, List<int> values)
     {
         // TODO Problem 3
-        // Solution: using foreach syntax
-        foreach (var value in values.AsEnumerable().Reverse())
+        if (node is not null) 
         {
-            values.Add(value);
+            TraverseBackward(node.Right, values); // Traverse right first
+            values.Add(node.Data);
+            TraverseBackward(node.Left, values); // Traverse left last
         }
-
-        // Other solution: using TraverseBackward method
-        // if (node is not null) 
-        // {
-        //     TraverseBackward(node.Right, values);
-        //     values.Add(node.Data);
-        //     TraverseBackward(node.Left, values);
-        // }
     }
 
     /// <summary>
