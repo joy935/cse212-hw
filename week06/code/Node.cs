@@ -58,6 +58,24 @@ public class Node
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        if (Left is null && Right is null)
+            return 1; // One node has a height of 1
+
+        int leftHeight;
+        int rightHeight;
+
+        if (Left is not null) {
+            leftHeight = Left.GetHeight();
+        } else {
+            leftHeight = -1; // Height of -1 for null nodes
+        }
+        
+        if (Right is not null) {
+            rightHeight = Right.GetHeight();
+        } else {
+            rightHeight = -1; // Height of -1 for null nodes
+        }
+
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
